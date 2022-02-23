@@ -1,6 +1,31 @@
 const rxNumber = /^-?\d+(?:\.\d+)?$/
 
 export const defaultParseMaximum = 1000
+export const operators: Record<'add' | 'subtract' | 'multiply' | 'divide', Operator> = {
+  add (numbers: number[]) {
+    return numbers.reduce((prev, curr) => {
+      return prev + curr
+    }, 0)
+  },
+  subtract (numbers: number[]) {
+    const value = numbers.reduce((prev: null | number, curr) => {
+      return prev === null ? curr : prev - curr
+    }, null)
+    return value ?? 0
+  },
+  multiply (numbers: number[]) {
+    const value = numbers.reduce((prev: null | number, curr) => {
+      return prev === null ? curr : prev * curr
+    }, null)
+    return value ?? 0
+  },
+  divide (numbers: number[]) {
+    const value = numbers.reduce((prev: null | number, curr) => {
+      return prev === null ? curr : prev / curr
+    }, null)
+    return value ?? 0
+  }
+}
 
 export interface ParseOptions {
   allowNegativeNumbers?: boolean
@@ -8,10 +33,12 @@ export interface ParseOptions {
   maximum?: number
 }
 
-export function calculate (numbers: number[]): number {
-  return numbers.reduce((prev, curr) => {
-    return prev + curr
-  }, 0)
+export type Operator = (numbers: number[]) => number
+
+export function calculate (numbers: number[], operator?: Operator): number {
+  return operator !== undefined
+    ? operator(numbers)
+    : operators.add(numbers)
 }
 
 export function parse (input: string, options?: ParseOptions): number[] {

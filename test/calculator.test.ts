@@ -1,4 +1,5 @@
-import { calculate, parse } from '../src/calculator'
+import { calculate, defaultParseMaximum, operators, parse } from '../src/calculator'
+import { getOptions, run } from '../src/cli'
 
 describe('parse', () => {
   test('it will parse a single number', () => {
@@ -90,5 +91,133 @@ describe('calculate', () => {
 
   test('it will calculate numbers with decimals', () => {
     expect(calculate([2.5, 3.1])).toEqual(5.6)
+  })
+
+  test('it can use subtraction', () => {
+    expect(calculate([8,4,2], operators.subtract)).toEqual(2)
+  })
+
+  test('it can use multiplication', () => {
+    expect(calculate([2,4,3], operators.multiply)).toEqual(24)
+  })
+
+  test('it can use division', () => {
+    expect(calculate([20,2,5], operators.divide)).toEqual(2)
+  })
+})
+
+describe('cli', () => {
+  describe('delimiters', () => {
+    test('it can handle no delimiters', () => {
+      const { options } = getOptions({})
+      expect(options.delimiters).toEqual([])
+    })
+
+    test('it can handle one delimiter', () => {
+      const { options } = getOptions({ delimiter: 'hello' })
+      expect(options.delimiters).toEqual(['hello'])
+    })
+
+    test('it can handle multiple delimiters', () => {
+      const { options } = getOptions({ delimiter: ['x', 'y']})
+      expect(options.delimiters).toEqual(['x', 'y'])
+    })
+  })
+
+  describe('allow negative number', () => {
+    test('it can handle absence of allowNegativeNumber', () => {
+      const { options } = getOptions({})
+      expect(options.allowNegativeNumbers).toEqual(false)
+    })
+
+    test('inclusion of allowNegativeNumbers results in true', () => {
+      const { options } = getOptions({ allowNegativeNumbers: false })
+      expect(options.allowNegativeNumbers).toEqual(true)
+    })
+  })
+
+  describe('maximum', function () {
+    test('it can handle absence of maximum', () => {
+      const { options } = getOptions({})
+      expect(options.maximum).toEqual(defaultParseMaximum)
+    })
+
+    test('it can handle one maximum', () => {
+      const { options } = getOptions({ maximum: '5000' })
+      expect(options.maximum).toEqual(5000)
+    })
+
+    test('it can handle multiple maximums', () => {
+      const { options } = getOptions({ maximum: ['5000', '50'] })
+      expect(options.maximum).toEqual(50)
+    })
+  });
+
+  describe('operation', function () {
+    test('it can handle absence of operation', () => {
+      const { operator } = getOptions({})
+      expect(operator).toEqual(operators.add)
+    })
+
+    test('it can handle one operation', () => {
+      const { operator } = getOptions({ operation: 'subtract' })
+      expect(operator).toEqual(operators.subtract)
+    })
+
+    test('it can handle multiple operations', () => {
+      const { operator } = getOptions({ operation: ['subtract', 'multiply'] })
+      expect(operator).toEqual(operators.multiply)
+    })
+
+    test('it can get add operator', () => {
+      const { operator } = getOptions({ operation: 'add' })
+      expect(operator).toEqual(operators.add)
+    })
+
+    test('it can get subtract operator', () => {
+      const { operator } = getOptions({ operation: 'subtract' })
+      expect(operator).toEqual(operators.subtract)
+    })
+
+    test('it can get multiply operator', () => {
+      const { operator } = getOptions({ operation: 'multiply' })
+      expect(operator).toEqual(operators.multiply)
+    })
+
+    test('it can get divide operator', () => {
+      const { operator } = getOptions({ operation: 'divide' })
+      expect(operator).toEqual(operators.divide)
+    })
+
+    test('it will fall back to add operator', () => {
+      const { operator } = getOptions({ operation: 'something-else' })
+      expect(operator).toEqual(operators.add)
+    })
+  });
+
+  describe('run', () => {
+    test('it can run addition', () => {
+      const { formula, result } = run('1,2', {}, operators.add)
+      expect(formula).toEqual('1+2 = 3')
+      expect(result).toEqual('3')
+    })
+
+    test('it can run subtraction', () => {
+      const { formula, result } = run('1,2', {}, operators.subtract)
+      expect(formula).toEqual('1-2 = -1')
+      expect(result).toEqual('-1')
+    })
+
+    test('it can run multiplication', () => {
+      const { formula, result } = run('1,2', {}, operators.multiply)
+      expect(formula).toEqual('1*2 = 2')
+      expect(result).toEqual('2')
+    })
+
+    test('it can run division', () => {
+      const { formula, result } = run('1,2', {}, operators.divide)
+      expect(formula).toEqual('1/2 = 0.5')
+      expect(result).toEqual('0.5')
+    })
   })
 })
