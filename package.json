@@ -4,6 +4,9 @@
   "private": true,
   "description": "",
   "main": "dist/index.js",
+  "bin": {
+    "challenge-calculator": "dist/index.js"
+  },
   "scripts": {
     "build": "tsc",
     "test": "jest",
@@ -20,5 +23,8 @@
     "ts-jest": "^27.1.3",
     "ts-standard": "^11.0.0",
     "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "yargs": "^17.3.1"
   }
 }

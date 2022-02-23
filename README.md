@@ -8,11 +8,12 @@ This set up must be done first before using and before testing the project.
 2. Open a terminal and navigate to the project directory.
 3. Run the command `npm install`
 4. Run the command `npm run build`
+5. Run the command `npm link`
 
 ## Usage
 
-1. Open a terminal and navigate to the project directory.
-2. Run the command `npm start`
+1. Open a terminal.
+2. Run the command `challenge-calculator`
 3. Use Ctrl+C to exit.
 
 ## Run Automated Tests
@@ -88,7 +89,7 @@ result I removed terminal tests and kept other unit tests.
 
 - [ ] Display the formula used to calculate the result e.g. `2,,4,rrrr,1001,6` will return `2+0+4+0+0+6 = 12`.
 - [X] Allow the application to process entered entries until Ctrl+C is used.
-- [ ] Allow the acceptance of argument to define alternate delimiter in step #3.
+- [X] Allow the acceptance of argument to define alternate delimiter in step #3.
 - [ ] Allow the acceptance of argument to define whether to deny negative numbers in step #4.
 - [ ] Allow the acceptance of argument to define upper bound in step #5.
 - [ ] Use dependency injection.

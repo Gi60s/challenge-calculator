@@ -1,5 +1,4 @@
 import { calculate, parse } from '../src/calculator'
-import { cli } from './cli-helper'
 
 describe('parse', () => {
   test('it will parse a single number', () => {
@@ -39,6 +38,11 @@ describe('parse', () => {
 
   test('it can use newline for delimiter', () => {
     expect(parse('1\n2,3')).toEqual([1,2,3])
+  })
+
+  test('it can have additional delimiters', () => {
+    const delimiters = ['foo', 'bar']
+    expect(parse('1\n2,3foo4bar5', { delimiters })).toEqual([1,2,3,4,5])
   })
 })
 

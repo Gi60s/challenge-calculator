@@ -1,6 +1,6 @@
 const rxNumber = /^-?\d+(?:\.\d+)?$/
 
-interface ParseOptions {
+export interface ParseOptions {
   delimiters?: string[]
 }
 
@@ -10,21 +10,24 @@ export function calculate (numbers: number[]): number {
   }, 0)
 }
 
-export function parse (input: string): number[] {
-  const options: ParseOptions = {}
-  if (options.delimiters === undefined) {
-    options.delimiters = [',', '\\n', '\n']
-  }
+export function parse (input: string, options?: ParseOptions): number[] {
+  if (options === undefined) options = {}
+
+  const delimiters: Set<string> = new Set(options.delimiters ?? [])
+  delimiters.add(',')
+  delimiters.add('\\n')
+  delimiters.add('\n')
 
   // apply multiple delimiters
   let items: string[] = [input]
-  options.delimiters.forEach(delimiter => {
+  Array.from(delimiters).forEach(delimiter => {
     const newItems: string[] = []
     items.forEach(value => {
       newItems.push(...value.split(delimiter))
     })
     items = newItems
   })
+  items.sort((a, b) => a.length < b.length ? -1 : 1)
 
   // convert string to numbers
   const numbers = items
