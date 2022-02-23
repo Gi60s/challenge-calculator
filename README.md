@@ -59,8 +59,8 @@ result I removed terminal tests and kept other unit tests.
 
 ### Step 6
 
-- [ ] Support 1 custom delimiter of a single character using the format: `//{delimiter}\n{numbers}`.
-- [ ] All previous formats should also be supported.
+- [X] Support 1 custom delimiter of a single character using the format: `//{delimiter}\n{numbers}`.
+- [X] All previous formats should also be supported.
 
 **Examples**
  

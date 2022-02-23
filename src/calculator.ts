@@ -17,24 +17,36 @@ export function calculate (numbers: number[]): number {
 export function parse (input: string, options?: ParseOptions): number[] {
   if (options === undefined) options = {}
 
+  // default delimiters that are always applied
   const delimiters: Set<string> = new Set(options.delimiters ?? [])
   delimiters.add(',')
   delimiters.add('\\n')
   delimiters.add('\n')
 
+  // overwrite allow negative numbers and maximum
   const allowNegativeNumbers = !!options.allowNegativeNumbers
   const maximum = options.maximum ?? defaultParseMaximum
 
+  // check for inline custom delimiters
+  const rxInlineDelimiters = /^\/\/(.)(?:\n|\\n)(.+)$/
+  const matches = rxInlineDelimiters.exec(input)
+  if (matches !== null) {
+    delimiters.add(matches[1])
+    input = matches[2]
+  }
+
   // apply multiple delimiters
+  const delimitersArray = Array.from(delimiters)
+  delimitersArray.sort((a, b) => a.length < b.length ? 1 : -1)
+
   let items: string[] = [input]
-  Array.from(delimiters).forEach(delimiter => {
+  delimitersArray.forEach(delimiter => {
     const newItems: string[] = []
     items.forEach(value => {
       newItems.push(...value.split(delimiter))
     })
     items = newItems
   })
-  items.sort((a, b) => a.length < b.length ? -1 : 1)
 
   // convert string to numbers
   const negativeNumbers: number[] = []
