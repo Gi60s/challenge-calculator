@@ -28,10 +28,16 @@ export function parse (input: string, options?: ParseOptions): number[] {
   const maximum = options.maximum ?? defaultParseMaximum
 
   // check for inline custom delimiters
-  const rxInlineDelimiters = /^\/\/(.)(?:\n|\\n)(.+)$/
+  const rxInlineDelimiters = /^\/\/(.+)(?:\n|\\n)(.+)$/
   const matches = rxInlineDelimiters.exec(input)
   if (matches !== null) {
-    delimiters.add(matches[1])
+    const inlineDelimiter: string = matches[1]
+    const length = inlineDelimiter.length
+    if (length === 1) {
+      delimiters.add(inlineDelimiter)
+    } else if (inlineDelimiter.charAt(0) === '[' && inlineDelimiter.charAt(length-1) === ']') {
+      delimiters.add(inlineDelimiter.substring(1, length-1))
+    }
     input = matches[2]
   }
 

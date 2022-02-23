@@ -64,17 +64,17 @@ result I removed terminal tests and kept other unit tests.
 
 **Examples**
  
-- [ ] `//#\n2#5` will return `7`
-- [ ] `//,\n2,ff,100` will return `102`
+- [X] `//#\n2#5` will return `7`
+- [X] `//,\n2,ff,100` will return `102`
 
 ### Step 7
 
-- [ ] Support 1 custom delimiter of any length using the format `//[{delimiter}]\n{numbers}`.
-- [ ] All previous formats should also be supported.
+- [X] Support 1 custom delimiter of any length using the format `//[{delimiter}]\n{numbers}`.
+- [X] All previous formats should also be supported.
 
 **Examples**
 
-- [ ] `//[***]\n11***22***33` will return `66`.
+- [X] `//[***]\n11***22***33` will return `66`.
 
 ### Step 8
 

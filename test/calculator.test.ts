@@ -54,8 +54,20 @@ describe('parse', () => {
     expect(parse('1\n2,3foo4bar5', { delimiters })).toEqual([1,2,3,4,5])
   })
 
-  test('it can have a single character inline delimiter', () => {
+  test('it can have a single character inline delimiter (x)', () => {
     expect(parse('//x\n1x2')).toEqual([1, 2])
+  })
+
+  test('it can have a single character inline delimiter (#)', () => {
+    expect(parse('//#\n2#5')).toEqual([2, 5])
+  })
+
+  test('it can have a single character inline delimiter (,)', () => {
+    expect(parse('//,\n2,ff,100')).toEqual([2, 0, 100])
+  })
+
+  test('it can have a single multi-character inline delimiter (***)', () => {
+    expect(parse('//[***]\n11***22***33')).toEqual([11, 22, 33])
   })
 })
 
