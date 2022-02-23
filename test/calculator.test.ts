@@ -69,6 +69,10 @@ describe('parse', () => {
   test('it can have a single multi-character inline delimiter (***)', () => {
     expect(parse('//[***]\n11***22***33')).toEqual([11, 22, 33])
   })
+
+  test('it can have a multiple multi-character inline delimiters', () => {
+    expect(parse('//[*][!!][r9r]\\n11r9r22*hh*33!!44')).toEqual([11, 22, 0, 33, 44])
+  })
 })
 
 describe('calculate', () => {

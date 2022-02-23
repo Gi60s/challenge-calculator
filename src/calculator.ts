@@ -36,7 +36,11 @@ export function parse (input: string, options?: ParseOptions): number[] {
     if (length === 1) {
       delimiters.add(inlineDelimiter)
     } else if (inlineDelimiter.charAt(0) === '[' && inlineDelimiter.charAt(length-1) === ']') {
-      delimiters.add(inlineDelimiter.substring(1, length-1))
+      inlineDelimiter.substring(1, length-1)
+        .split('][')
+        .forEach(inlineDelimiterItem => {
+          delimiters.add(inlineDelimiterItem)
+        })
     }
     input = matches[2]
   }

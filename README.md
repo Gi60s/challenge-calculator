@@ -78,12 +78,12 @@ result I removed terminal tests and kept other unit tests.
 
 ### Step 8
 
-- [ ] Support multiple delimiters of any length using the format: `//[{delimiter1}][{delimiter2}]...\n{numbers}`
-- [ ] All previous formats should also be supported
+- [X] Support multiple delimiters of any length using the format: `//[{delimiter1}][{delimiter2}]...\n{numbers}`
+- [X] All previous formats should also be supported
 
 **Examples** 
 
-- `//[*][!!][r9r]\n11r9r22*hh*33!!44` will return `110`.
+- [X] `//[*][!!][r9r]\n11r9r22*hh*33!!44` will return `110`.
 
 ## Stretch goals
 
