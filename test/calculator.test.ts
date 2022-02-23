@@ -7,8 +7,13 @@ describe('parse', () => {
   })
 
   test('it will parse two numbers separated by a comma', () => {
-    const numbers = parse('1,5000')
+    const numbers = parse('1,5000', { maximum: 10000 })
     expect(numbers).toEqual([1, 5000])
+  })
+
+  test('it has a default maximum of 1000', () => {
+    const numbers = parse('1,5000')
+    expect(numbers).toEqual([1, 0])
   })
 
   test('it will not allow negative numbers', () => {

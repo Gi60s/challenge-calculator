@@ -1,8 +1,11 @@
 const rxNumber = /^-?\d+(?:\.\d+)?$/
 
+export const defaultParseMaximum = 1000
+
 export interface ParseOptions {
   allowNegativeNumbers?: boolean
   delimiters?: string[]
+  maximum?: number
 }
 
 export function calculate (numbers: number[]): number {
@@ -20,6 +23,7 @@ export function parse (input: string, options?: ParseOptions): number[] {
   delimiters.add('\n')
 
   const allowNegativeNumbers = !!options.allowNegativeNumbers
+  const maximum = options.maximum ?? defaultParseMaximum
 
   // apply multiple delimiters
   let items: string[] = [input]
@@ -36,10 +40,11 @@ export function parse (input: string, options?: ParseOptions): number[] {
   const negativeNumbers: number[] = []
   const numbers = items
     .map(value => {
-      const num = rxNumber.test(value)
+      let num = rxNumber.test(value)
         ? +value
         : 0
       if (num < 0 && !allowNegativeNumbers) negativeNumbers.push(num)
+      if (num > maximum) num = 0
       return num
     })
 

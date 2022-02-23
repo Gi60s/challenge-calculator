@@ -55,7 +55,7 @@ result I removed terminal tests and kept other unit tests.
 
 ### Step 5
 
-- [ ] Make any value greater than 1000 an invalid number e.g. `2,1001,6` will return `8`
+- [X] Make any value greater than 1000 an invalid number e.g. `2,1001,6` will return `8`
 
 ### Step 6
 
@@ -91,6 +91,6 @@ result I removed terminal tests and kept other unit tests.
 - [X] Allow the application to process entered entries until Ctrl+C is used.
 - [X] Allow the acceptance of argument to define alternate delimiter in step #3.
 - [X] Allow the acceptance of argument to define whether to deny negative numbers in step #4.
-- [ ] Allow the acceptance of argument to define upper bound in step #5.
+- [X] Allow the acceptance of argument to define upper bound in step #5.
 - [ ] Use dependency injection.
 - [ ] Support subtraction, multiplication, and division operations.
