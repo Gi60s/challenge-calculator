@@ -7,11 +7,11 @@ import { calculate, parse, ParseOptions } from './calculator'
 
 const args = yargs(hideBin(process.argv)).argv
 const options: ParseOptions = {
+  allowNegativeNumbers: args.allowNegativeNumbers !== undefined,
   delimiters: Array.isArray(args.delimiter)
     ? args.delimiter
     : (args.delimiter !== undefined ? [args.delimiter] : [])
 }
-console.log(options)
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -19,9 +19,10 @@ const rl = readline.createInterface({
 })
 
 console.log('You can start this process with arguments now. Here are some examples:')
-console.log('npm start --delimiter=foo --delimiter=X         This will add two new delimiters: *** and !' + EOL)
+console.log('code-challenge --delimiter=foo --delimiter=X         This will add two new delimiters: foo and X')
+console.log('code-challenge --allow-negative-number=true          This will allow negative numbers.')
 
-console.log('Enter two numbers separated by a comma, then hit enter. Use Ctrl+C to exit.' + EOL)
+console.log(EOL + 'Enter two numbers separated by a comma, then hit enter. Use Ctrl+C to exit.' + EOL)
 
 process.stdout.write('> ')
 rl.on('line', (input) => {

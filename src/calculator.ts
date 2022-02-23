@@ -1,6 +1,7 @@
 const rxNumber = /^-?\d+(?:\.\d+)?$/
 
 export interface ParseOptions {
+  allowNegativeNumbers?: boolean
   delimiters?: string[]
 }
 
@@ -18,6 +19,8 @@ export function parse (input: string, options?: ParseOptions): number[] {
   delimiters.add('\\n')
   delimiters.add('\n')
 
+  const allowNegativeNumbers = !!options.allowNegativeNumbers
+
   // apply multiple delimiters
   let items: string[] = [input]
   Array.from(delimiters).forEach(delimiter => {
@@ -30,12 +33,19 @@ export function parse (input: string, options?: ParseOptions): number[] {
   items.sort((a, b) => a.length < b.length ? -1 : 1)
 
   // convert string to numbers
+  const negativeNumbers: number[] = []
   const numbers = items
     .map(value => {
-      return rxNumber.test(value)
+      const num = rxNumber.test(value)
         ? +value
         : 0
+      if (num < 0 && !allowNegativeNumbers) negativeNumbers.push(num)
+      return num
     })
+
+  if (!allowNegativeNumbers && negativeNumbers.length > 0) {
+    throw Error('Negative numbers not allowed: ' + negativeNumbers.join(', '))
+  }
 
   return numbers
 }

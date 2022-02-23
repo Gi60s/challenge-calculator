@@ -51,7 +51,7 @@ result I removed terminal tests and kept other unit tests.
 
 ### Step 4
 
-- [ ] Deny negative numbers by throwing an exception that includes all the negative numbers provided.
+- [X] Deny negative numbers by throwing an exception that includes all the negative numbers provided.
 
 ### Step 5
 
@@ -90,7 +90,7 @@ result I removed terminal tests and kept other unit tests.
 - [ ] Display the formula used to calculate the result e.g. `2,,4,rrrr,1001,6` will return `2+0+4+0+0+6 = 12`.
 - [X] Allow the application to process entered entries until Ctrl+C is used.
 - [X] Allow the acceptance of argument to define alternate delimiter in step #3.
-- [ ] Allow the acceptance of argument to define whether to deny negative numbers in step #4.
+- [X] Allow the acceptance of argument to define whether to deny negative numbers in step #4.
 - [ ] Allow the acceptance of argument to define upper bound in step #5.
 - [ ] Use dependency injection.
 - [ ] Support subtraction, multiplication, and division operations.

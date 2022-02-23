@@ -11,9 +11,13 @@ describe('parse', () => {
     expect(numbers).toEqual([1, 5000])
   })
 
-  test('it will allow negative numbers', () => {
-    const numbers = parse('4,-3')
-    expect(numbers).toEqual([4, -3])
+  test('it will not allow negative numbers', () => {
+    expect(() => parse('4,-3,-7')).toThrow(/Negative numbers not allowed: -3, -7/)
+  })
+
+  it('can add the option to include negative numbers', () => {
+    const numbers = parse('4,-3,-7', { allowNegativeNumbers: true })
+    expect(numbers).toEqual([4, -3, -7])
   })
 
   test('it will use zero for empty input', () => {
