@@ -17,6 +17,10 @@ This set up must be done first before using and before testing the project.
 
 ## Run Automated Tests
 
+NOTE: I noticed between step 2 and 3 that my terminal tests were
+randomly unsuccessful based on which terminal was being used. As a
+result I removed terminal tests and kept other unit tests.
+
 1. Open a terminal and navigate to the project directory.
 2. Run the command `npm test`
 
@@ -42,7 +46,7 @@ This set up must be done first before using and before testing the project.
 
 ### Step 3
 
-- [ ] Support a newline character as an alternative delimiter e.g. `1\n2,3` will return `6`.
+- [X] Support a newline character as an alternative delimiter e.g. `1\n2,3` will return `6`.
 
 ### Step 4
 

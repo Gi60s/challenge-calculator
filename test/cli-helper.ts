@@ -36,7 +36,9 @@ export async function cli (input: string): Promise<string> {
     child?.stdout?.on('data', data => {
       if (data === '> ' && firstPrompt) {
         firstPrompt = false
-        child?.stdin?.write(input + EOL)
+        setTimeout(() => {
+          child?.stdin?.write(input + EOL)
+        })
       } else if (data.startsWith('Result: ')) {
         resolve(data.substring(8).replace(/(?:\r\n|\r|\n)+$/, ''))
         child?.kill()

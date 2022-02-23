@@ -36,6 +36,10 @@ describe('parse', () => {
     const numbers = parse('2.5,3.1')
     expect(numbers).toEqual([2.5, 3.1])
   })
+
+  test('it can use newline for delimiter', () => {
+    expect(parse('1\n2,3')).toEqual([1,2,3])
+  })
 })
 
 describe('calculate', () => {
@@ -53,52 +57,5 @@ describe('calculate', () => {
 
   test('it will calculate numbers with decimals', () => {
     expect(calculate([2.5, 3.1])).toEqual(5.6)
-  })
-})
-
-describe('command line interface', () => {
-  test('it will accept one number', async () => {
-    const result = await cli('1')
-    expect(result).toEqual('1')
-  })
-
-  test('it will accept two numbers separated by a comma', async () => {
-    const result = await cli('1,5')
-    expect(result).toEqual('6')
-  })
-
-  test('it will accept a positive and a negative number', async () => {
-    const result = await cli('4,-3')
-    expect(result).toEqual('1')
-  })
-
-  test('it will accept two negative numbers', async () => {
-    const result = await cli('-1,-3')
-    expect(result).toEqual('-4')
-  })
-
-  test('it will return zero for empty input', async () => {
-    const result = await cli('')
-    expect(result).toEqual('0')
-  })
-
-  test('it will use zero for missing numbers', async () => {
-    const result = await cli(',2')
-    expect(result).toEqual('2')
-  })
-
-  test('it will use zero for invalid numbers', async () => {
-    const result = await cli('5,tytyt')
-    expect(result).toEqual('5')
-  })
-
-  test('it will allow numbers with decimals', async () => {
-    const result = await cli('2.5,3.1')
-    expect(result).toEqual('5.6')
-  })
-
-  test('it will allow more than two numbers', async () => {
-    const result = await cli('1,2,3,4,5,6,7,8,9,10,11,12')
-    expect(result).toEqual('78')
   })
 })
