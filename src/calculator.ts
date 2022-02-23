@@ -15,8 +15,5 @@ export function parse (input: string): number[] {
         : 0
     })
 
-  // throw an error if there are more than two numbers
-  if (numbers.length > 2) throw Error('Invalid input. Only two numbers are allowed')
-
   return numbers
 }

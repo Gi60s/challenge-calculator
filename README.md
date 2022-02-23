@@ -38,7 +38,7 @@ This set up must be done first before using and before testing the project.
 
 ### Step 2
 
-- [ ] Remove the maximum constraint for numbers e.g. `1,2,3,4,5,6,7,8,9,10,11,12` will return `78`.
+- [X] Remove the maximum constraint for numbers e.g. `1,2,3,4,5,6,7,8,9,10,11,12` will return `78`.
 
 ### Step 3
 
@@ -83,7 +83,7 @@ This set up must be done first before using and before testing the project.
 ## Stretch goals
 
 - [ ] Display the formula used to calculate the result e.g. `2,,4,rrrr,1001,6` will return `2+0+4+0+0+6 = 12`.
-- [ ] Allow the application to process entered entries until Ctrl+C is used.
+- [X] Allow the application to process entered entries until Ctrl+C is used.
 - [ ] Allow the acceptance of argument to define alternate delimiter in step #3.
 - [ ] Allow the acceptance of argument to define whether to deny negative numbers in step #4.
 - [ ] Allow the acceptance of argument to define upper bound in step #5.

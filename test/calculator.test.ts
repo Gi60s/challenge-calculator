@@ -36,10 +36,6 @@ describe('parse', () => {
     const numbers = parse('2.5,3.1')
     expect(numbers).toEqual([2.5, 3.1])
   })
-
-  test('it will throw an error if more than two items are provided', () => {
-    expect(() => parse('5,ok,6')).toThrow(/Only two numbers are allowed/)
-  })
 })
 
 describe('calculate', () => {
@@ -99,5 +95,10 @@ describe('command line interface', () => {
   test('it will allow numbers with decimals', async () => {
     const result = await cli('2.5,3.1')
     expect(result).toEqual('5.6')
+  })
+
+  test('it will allow more than two numbers', async () => {
+    const result = await cli('1,2,3,4,5,6,7,8,9,10,11,12')
+    expect(result).toEqual('78')
   })
 })
